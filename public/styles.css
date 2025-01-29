@@ -30,11 +30,21 @@ body {
 }
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   grid-column: 1 / 2;
   grid-row: 2 / 3;
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
   height: 100%;
+}
+
+.sidebar h2 {
+  font-family: "Jersey 15";
+  color: rgb(48, 48, 48);
+  font-size: 2rem;
+  margin-bottom: 5px;
 }
 
 .task-section {
@@ -89,7 +99,7 @@ select {
 label {
   color: rgb(62, 62, 62);
   font-weight: 700;
-  padding-left: 7%;
+  padding-left: 10px;
 }
 
 #add-task {
@@ -107,6 +117,7 @@ label {
 }
 
 .project-form {
+  margin-top: 10px;
   display: flex;
   background-color: rgb(255, 255, 255);
   height: 90px;
@@ -144,4 +155,24 @@ label {
 .task-container {
   width: 100%;
   background-color: rgb(225, 225, 225);
+}
+
+.project-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 10px;
+}
+
+.project-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 100px;
+  background-color: rgb(40, 40, 40);
+  border-radius: 8px;
+  color: rgb(255, 255, 255);
 }
