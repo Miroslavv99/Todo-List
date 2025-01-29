@@ -1,4 +1,3 @@
-import { th } from "date-fns/locale";
 import { Task } from "./Task";
 
 export class Project {
@@ -18,7 +17,7 @@ export class Project {
     this.#tasks.push(task);
   }
 
-  getTask() {
+  getTasks() {
     return this.#tasks;
   }
 }
