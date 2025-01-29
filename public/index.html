@@ -17,22 +17,41 @@
     <div class="sidebar">
       <form class="project-form">
         <div>
-          <label for="project-title">PROJECT NAME</label>
-          <input type="text" name="project-title" id="project-title" />
+          <label for="project-title">PROJECT TITLE</label>
+          <input
+            type="text"
+            name="project-title"
+            id="project-title"
+            minlength="2"
+            required
+          />
         </div>
         <button type="submit" id="add-project">+</button>
       </form>
+      <h2>Your Projects</h2>
       <div class="project-container"></div>
     </div>
     <div class="task-section">
       <form class="task-form">
         <div>
           <label for="task-title">TITLE</label>
-          <input type="text" name="task-title" id="task-title" />
+          <input
+            type="text"
+            name="task-title"
+            id="task-title"
+            minlength="2"
+            required
+          />
         </div>
         <div>
           <label for="description">DESCRIPTION</label>
-          <input type="text" name="description" id="description" />
+          <input
+            type="text"
+            name="description"
+            id="description"
+            minlength="2"
+            required
+          />
         </div>
         <div>
           <label for="date">DEADLINE</label>
