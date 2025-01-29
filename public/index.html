@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Teko:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Todo List</title>
+  </head>
+  <body>
+    <header class="header"><h1>TODO LIST</h1></header>
+    <div class="sidebar">
+      <form class="project-form">
+        <div>
+          <label for="project-title">PROJECT NAME</label>
+          <input type="text" name="project-title" id="project-title" />
+        </div>
+        <button type="submit" id="add-project">+</button>
+      </form>
+      <div class="project-container"></div>
+    </div>
+    <div class="task-section">
+      <form class="task-form">
+        <div>
+          <label for="task-title">TITLE</label>
+          <input type="text" name="task-title" id="task-title" />
+        </div>
+        <div>
+          <label for="description">DESCRIPTION</label>
+          <input type="text" name="description" id="description" />
+        </div>
+        <div>
+          <label for="date">DEADLINE</label>
+          <input type="date" name="date" id="date" />
+        </div>
+        <div>
+          <label for="priority">PRIORITY</label>
+          <select id="priority" name="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <button type="submit" id="add-task">ADD TASK</button>
+      </form>
+      <div class="task-container"></div>
+    </div>
+  </body>
+</html>
