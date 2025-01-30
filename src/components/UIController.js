@@ -1,7 +1,8 @@
 import { ProjectManager } from "./ProjectManager";
 
 export class UIController {
-  constructor(projectManager) {
+  constructor(projectManager, storageManager) {
+    this.storageManager = storageManager;
     this.projectManager = projectManager;
     this.selectedProject = null;
     this.projectFormInit();
@@ -20,6 +21,7 @@ export class UIController {
       if (projectTitleValue.trim()) {
         this.projectManager.addProject(projectTitleValue);
         this.renderProjects(this.projectManager.getProjects());
+        this.storageManager.saveProjects(this.projectManager.getProjects());
       }
 
       projectForm.reset();
@@ -109,8 +111,15 @@ export class UIController {
           priorityValue
         );
         this.renderTasks(this.selectedProject.getTasks());
+        this.storageManager.saveProjects(this.projectManager.getProjects());
         taskForm.reset();
       }
     });
+  }
+}
+
+export class StorageManager {
+  saveProjects(projects) {
+    localStorage.setItem("projects", JSON.stringify(projects));
   }
 }
