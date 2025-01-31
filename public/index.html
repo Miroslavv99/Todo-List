@@ -55,14 +55,14 @@
         </div>
         <div>
           <label for="date">DEADLINE</label>
-          <input type="date" name="date" id="date" />
+          <input type="date" name="date" id="date" required />
         </div>
         <div>
           <label for="priority">PRIORITY</label>
-          <select id="priority" name="priority">
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
+          <select required id="priority" name="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
           </select>
         </div>
         <button type="submit" id="add-task">ADD TASK</button>
