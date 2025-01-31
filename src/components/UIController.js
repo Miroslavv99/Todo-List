@@ -84,6 +84,12 @@ export class UIController {
       projectCard.addEventListener("click", () => {
         this.selectedProject = project;
         this.renderTasks(this.selectedProject.getTasks());
+
+        const projectCards = document.querySelectorAll(".project-card");
+        projectCards.forEach((card) => {
+          card.classList.remove("active");
+        });
+        projectCard.classList.add("active");
       });
     });
   }
