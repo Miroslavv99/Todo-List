@@ -17,7 +17,7 @@ body {
 .header {
   grid-column: 1 / 3;
   grid-row: 1 / 2;
-  background-color: rgb(49, 49, 49);
+  background-color: rgb(65, 65, 65);
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -62,6 +62,7 @@ body {
   padding: 10px;
   gap: 10px;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
 }
 
 .task-form input {
@@ -153,6 +154,10 @@ label {
 }
 
 .task-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   width: 100%;
   background-color: rgb(225, 225, 225);
 }
@@ -167,12 +172,104 @@ label {
 }
 
 .project-card {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 90%;
   height: 100px;
-  background-color: rgb(40, 40, 40);
+  background-color: rgb(65, 65, 65);
   border-radius: 8px;
   color: rgb(255, 255, 255);
+  border: none;
+}
+
+.project-card.active {
+  background-color: rgb(26, 167, 30, 0.5);
+  color: rgb(29, 106, 25);
+  border: none;
+}
+
+.project-card:hover {
+  background-color: rgb(26, 167, 30, 0.5);
+  color: rgb(29, 106, 25);
+}
+
+.project-card h1:hover {
+  color: rgb(29, 106, 25);
+}
+
+.task-card {
+  overflow: hidden;
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+  grid-template-columns: 0.1fr 5fr;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  background-color: rgb(255, 255, 255);
+}
+
+.card-top {
+  position: relative;
+  align-items: center;
+  display: flex;
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+  width: 100%;
+  gap: 20px;
+  position: relative;
+  left: 20px;
+}
+
+.card-bottom {
+  display: flex;
+  align-items: center;
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+  position: relative;
+  left: 20px;
+  gap: 20px;
+}
+
+.priority {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  width: 100%;
+  height: 100%;
+}
+
+.delete-button {
+  opacity: 0.5;
+  position: absolute;
+  left: 90%;
+  bottom: 70%;
+  cursor: pointer;
+  border: none;
+  background: url("../public/images/grey-cross.png");
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+}
+
+.delete-button:hover {
+  opacity: 1;
+}
+
+.delete-task {
+  opacity: 0.8;
+  border: none;
+  cursor: pointer;
+  background: url("../public/images/trash.png");
+  background-size: contain;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 93%;
+  bottom: 75%;
+}
+
+.delete-task:hover {
+  opacity: 1;
 }
