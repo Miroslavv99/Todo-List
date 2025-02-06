@@ -1,18 +1,20 @@
 import { Project } from "./Project";
 
 export class ProjectManager {
-  #projects = [];
+  constructor() {
+    this._projects = [];
+  }
 
   addProject(projectTitle) {
     const project = new Project(projectTitle);
-    this.#projects.push(project);
+    this._projects.push(project);
   }
 
   deleteProject(index) {
-    this.#projects.splice(index, 1);
+    this._projects.splice(index, 1);
   }
 
   getProjects() {
-    return this.#projects;
+    return this._projects;
   }
 }
