@@ -7,7 +7,21 @@ export class StorageManager {
 
   getStoredProjects() {
     let projects = localStorage.getItem("projects");
+    if (!projects) return [];
     projects = JSON.parse(projects);
-    return projects.map((project) => new Project(project.projectTitle)) || [];
+
+    return projects.map((projectData) => {
+      const project = new Project(projectData.projectTitle);
+
+      projectData._tasks.forEach((taskData) => {
+        project.addTask(
+          taskData.taskTitle,
+          taskData.taskDescription,
+          taskData.taskDeadline,
+          taskData.taskPriority
+        );
+      });
+      return project;
+    });
   }
 }
