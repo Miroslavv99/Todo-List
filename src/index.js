@@ -13,6 +13,18 @@ document.addEventListener("DOMContentLoaded", () => {
   storedProjects.forEach((project) => {
     projectManager.addProject(project.projectTitle);
 
+    project.getTasks().forEach((task) => {
+      projectManager
+        .getProjects()
+        .find((item) => item.projectTitle === project.projectTitle)
+        .addTask(
+          task.taskTitle,
+          task.taskDescription,
+          task.taskDeadline,
+          task.taskPriority
+        );
+    });
+
     uiController.renderProjects(projectManager.getProjects());
   });
 });
