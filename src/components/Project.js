@@ -1,9 +1,9 @@
 import { Task } from "./Task";
 
 export class Project {
-  #tasks = [];
   constructor(projectTitle) {
     this.projectTitle = projectTitle;
+    this._tasks = [];
   }
 
   addTask(taskTitle, taskDescription, taskDeadline, taskPriority) {
@@ -13,14 +13,14 @@ export class Project {
       taskDeadline,
       taskPriority
     );
-    this.#tasks.push(task);
+    this._tasks.push(task);
   }
 
   deleteTask(index) {
-    this.#tasks.splice(index, 1);
+    this._tasks.splice(index, 1);
   }
 
   getTasks() {
-    return this.#tasks;
+    return this._tasks;
   }
 }
