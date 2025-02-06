@@ -273,3 +273,46 @@ label {
 .delete-task:hover {
   opacity: 1;
 }
+
+.complete-button {
+  border: none;
+  height: 40px;
+  width: 120px;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 1rem;
+  background-color: rgb(26, 167, 30, 0.5);
+  color: rgb(29, 106, 25);
+  position: relative;
+  bottom: 5px;
+}
+
+.incomplete-button {
+  position: relative;
+  bottom: 5px;
+  border: none;
+  height: 40px;
+  width: 120px;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 1rem;
+  color: rgb(95, 0, 0);
+  background-color: rgba(250, 3, 3, 0.6);
+}
+
+#add-project {
+  position: relative;
+  top: 9px;
+  border: none;
+  background-color: rgb(26, 167, 30, 0.5);
+  height: 40px;
+  width: 100px;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: 300;
+  color: rgb(29, 106, 25);
+  cursor: pointer;
+  font-size: 2rem;
+}

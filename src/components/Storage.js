@@ -18,7 +18,8 @@ export class StorageManager {
           taskData.taskTitle,
           taskData.taskDescription,
           taskData.taskDeadline,
-          taskData.taskPriority
+          taskData.taskPriority,
+          taskData.taskCompleted
         );
       });
       return project;

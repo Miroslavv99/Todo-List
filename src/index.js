@@ -21,7 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
           task.taskTitle,
           task.taskDescription,
           task.taskDeadline,
-          task.taskPriority
+          task.taskPriority,
+          task.taskCompleted
         );
     });
 

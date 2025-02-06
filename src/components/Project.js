@@ -6,12 +6,19 @@ export class Project {
     this._tasks = [];
   }
 
-  addTask(taskTitle, taskDescription, taskDeadline, taskPriority) {
+  addTask(
+    taskTitle,
+    taskDescription,
+    taskDeadline,
+    taskPriority,
+    taskCompleted
+  ) {
     const task = new Task(
       taskTitle,
       taskDescription,
       taskDeadline,
-      taskPriority
+      taskPriority,
+      taskCompleted
     );
     this._tasks.push(task);
   }

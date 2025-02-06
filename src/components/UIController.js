@@ -132,12 +132,42 @@ export class UIController {
       cardDeadline.textContent = `DEADLINE: ${task.taskDeadline}`;
       bottomContainer.appendChild(cardDeadline);
 
+      const changeComplete = document.createElement("button");
+      changeComplete.classList.add("incomplete-button");
+      changeComplete.textContent = `${task.taskCompleted}`;
+      bottomContainer.appendChild(changeComplete);
+
+      if (task.taskCompleted === "COMPLETED") {
+        changeComplete.classList.add("complete-button");
+        changeComplete.classList.remove("incomplete-button");
+      } else {
+        changeComplete.classList.add("incomplete-button");
+        changeComplete.classList.remove("complete-button");
+      }
+
+      changeComplete.addEventListener("click", () => {
+        task.taskCompleted =
+          task.taskCompleted === "COMPLETED" ? "PENDING" : "COMPLETED";
+        changeComplete.textContent = `${task.taskCompleted}`;
+
+        if (task.taskCompleted === "COMPLETED") {
+          changeComplete.classList.add("complete-button");
+          changeComplete.classList.remove("incomplete-button");
+        } else {
+          changeComplete.classList.add("incomplete-button");
+          changeComplete.classList.remove("complete-button");
+        }
+
+        this.storageManager.saveProjects(this.projectManager.getProjects());
+      });
+
       const deleteTask = document.createElement("button");
       deleteTask.classList.add("delete-task");
       bottomContainer.appendChild(deleteTask);
 
       deleteTask.addEventListener("click", () => {
         this.selectedProject.deleteTask(index);
+        this.storageManager.saveProjects(this.projectManager.getProjects());
         this.renderTasks(this.selectedProject.getTasks());
       });
 
