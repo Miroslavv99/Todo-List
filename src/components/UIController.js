@@ -1,183 +1,62 @@
 import { ProjectManager } from "./ProjectManager";
 import { StorageManager } from "./Storage";
+import { Renderer } from "./Renderer";
 
 export class UIController {
-  constructor(projectManager, storageManager) {
+  constructor(projectManager, storageManager, renderer) {
     this.storageManager = storageManager;
     this.projectManager = projectManager;
     this.selectedProject = null;
-    this.projectFormInit();
-    this.taskFormInit();
+    this.renderer = renderer;
   }
 
-  projectFormInit() {
-    const projectForm = document.querySelector(".project-form");
-    const projectTitleInput = document.querySelector("#project-title");
-
-    projectForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const projectTitleValue = projectTitleInput.value;
-
-      if (projectTitleValue.trim()) {
-        this.projectManager.addProject(projectTitleValue);
-        this.renderProjects(this.projectManager.getProjects());
-        this.storageManager.saveProjects(this.projectManager.getProjects());
-      }
-
-      projectForm.reset();
-    });
+  addProject(projectTitle) {
+    this.projectManager.addProject(projectTitle);
+    this.storageManager.saveProjects(this.projectManager.getProjects());
+    this.renderer.renderProjects(this.projectManager.getProjects());
   }
 
-  taskFormInit() {
-    const taskForm = document.querySelector(".task-form");
-
-    taskForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const titleValue = document.querySelector("#task-title").value;
-      const descriptionValue = document.querySelector("#description").value;
-      const dateValue = document.querySelector("#date").value;
-      const priorityValue = document.querySelector("#priority").value;
-
-      if (!this.selectedProject) {
-        alert("First, select a project!");
-        return;
-      } else {
-        this.selectedProject.addTask(
-          titleValue,
-          descriptionValue,
-          dateValue,
-          priorityValue
-        );
-        this.renderTasks(this.selectedProject.getTasks());
-        this.storageManager.saveProjects(this.projectManager.getProjects());
-        taskForm.reset();
-      }
-    });
+  deleteProject(index) {
+    this.projectManager.deleteProject(index);
+    this.storageManager.saveProjects(this.projectManager.getProjects());
+    this.renderer.renderProjects(this.projectManager.getProjects());
   }
 
-  renderProjects(projects) {
-    const projectContainer = document.querySelector(".project-container");
-
-    projectContainer.innerHTML = "";
-
-    projects.forEach((project, index) => {
-      const projectCard = document.createElement("button");
-      projectCard.classList.add("project-card");
-      projectContainer.appendChild(projectCard);
-
-      const cardTitle = document.createElement("h1");
-      cardTitle.textContent = `${project.projectTitle}`;
-      projectCard.appendChild(cardTitle);
-
-      const deleteButton = document.createElement("button");
-      deleteButton.classList.add("delete-button");
-      projectCard.appendChild(deleteButton);
-
-      deleteButton.addEventListener("click", () => {
-        this.projectManager.deleteProject(index);
-        this.renderProjects(this.projectManager.getProjects());
-        this.storageManager.saveProjects(this.projectManager.getProjects());
-      });
-
-      projectCard.addEventListener("click", () => {
-        this.selectedProject = project;
-        this.renderTasks(this.selectedProject.getTasks());
-
-        const projectCards = document.querySelectorAll(".project-card");
-        projectCards.forEach((card) => {
-          card.classList.remove("active");
-        });
-        projectCard.classList.add("active");
-      });
-    });
+  selectProject(index) {
+    this.selectedProject = this.projectManager.getProjects()[index];
+    if (!this.selectedProject) return;
+    this.renderer.renderTasks(this.selectedProject.getTasks());
   }
 
-  renderTasks(tasks) {
-    const taskContainer = document.querySelector(".task-container");
-    taskContainer.innerHTML = "";
+  addTask(taskTitle, taskDescription, taskDeadline, taskPriority) {
+    if (!this.selectedProject) {
+      alert("First, select a project!");
+      return;
+    }
 
-    tasks.forEach((task, index) => {
-      const taskCard = document.createElement("div");
-      taskCard.classList.add("task-card");
-      taskContainer.appendChild(taskCard);
+    this.selectedProject.addTask(
+      taskTitle,
+      taskDescription,
+      taskDeadline,
+      taskPriority
+    );
 
-      const priorityDiv = document.createElement("div");
-      priorityDiv.classList.add("priority");
-      taskCard.appendChild(priorityDiv);
+    this.storageManager.saveProjects(this.projectManager.getProjects());
+    this.renderer.renderTasks(this.selectedProject.getTasks());
+  }
 
-      const topContainer = document.createElement("div");
-      topContainer.classList.add("card-top");
-      taskCard.appendChild(topContainer);
+  deleteTask(index) {
+    if (!this.selectedProject) return;
 
-      const bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("card-bottom");
-      taskCard.appendChild(bottomContainer);
+    this.selectedProject.deleteTask(index);
+    this.storageManager.saveProjects(this.projectManager.getProjects());
+    this.renderer.renderTasks(this.selectedProject.getTasks());
+  }
 
-      const cardTitle = document.createElement("h2");
-      cardTitle.textContent = `${task.taskTitle}`;
-      topContainer.appendChild(cardTitle);
-
-      const cardDescription = document.createElement("span");
-      cardDescription.textContent = `${task.taskDescription}`;
-      cardDescription.style.color = "grey";
-      topContainer.appendChild(cardDescription);
-
-      const cardPriority = document.createElement("span");
-      cardPriority.textContent = `PRIORITY: ${task.taskPriority}`;
-      bottomContainer.appendChild(cardPriority);
-
-      const cardDeadline = document.createElement("span");
-      cardDeadline.textContent = `DEADLINE: ${task.taskDeadline}`;
-      bottomContainer.appendChild(cardDeadline);
-
-      const changeComplete = document.createElement("button");
-      changeComplete.classList.add("incomplete-button");
-      changeComplete.textContent = `${task.taskCompleted}`;
-      bottomContainer.appendChild(changeComplete);
-
-      if (task.taskCompleted === "COMPLETED") {
-        changeComplete.classList.add("complete-button");
-        changeComplete.classList.remove("incomplete-button");
-      } else {
-        changeComplete.classList.add("incomplete-button");
-        changeComplete.classList.remove("complete-button");
-      }
-
-      changeComplete.addEventListener("click", () => {
-        task.taskCompleted =
-          task.taskCompleted === "COMPLETED" ? "PENDING" : "COMPLETED";
-        changeComplete.textContent = `${task.taskCompleted}`;
-
-        if (task.taskCompleted === "COMPLETED") {
-          changeComplete.classList.add("complete-button");
-          changeComplete.classList.remove("incomplete-button");
-        } else {
-          changeComplete.classList.add("incomplete-button");
-          changeComplete.classList.remove("complete-button");
-        }
-
-        this.storageManager.saveProjects(this.projectManager.getProjects());
-      });
-
-      const deleteTask = document.createElement("button");
-      deleteTask.classList.add("delete-task");
-      bottomContainer.appendChild(deleteTask);
-
-      deleteTask.addEventListener("click", () => {
-        this.selectedProject.deleteTask(index);
-        this.storageManager.saveProjects(this.projectManager.getProjects());
-        this.renderTasks(this.selectedProject.getTasks());
-      });
-
-      if (task.taskPriority === "Low") {
-        priorityDiv.style.backgroundColor = "rgb(26, 167, 30, 0.5)";
-      } else if (task.taskPriority === "Medium") {
-        priorityDiv.style.backgroundColor = "rgb(255, 221, 0, 0.5)";
-      } else {
-        priorityDiv.style.backgroundColor = "rgba(255, 0, 0, 0.6)";
-      }
-    });
+  toggleTaskCompleted(task) {
+    task.taskCompleted =
+      task.taskCompleted === "COMPLETED" ? "PENDING" : "COMPLETED";
+    this.storageManager.saveProjects(this.projectManager.getProjects());
+    this.renderer.renderTasks(this.selectedProject.getTasks());
   }
 }

@@ -3,10 +3,15 @@ import { Project } from "./components/Project";
 import { ProjectManager } from "./components/ProjectManager";
 import { UIController } from "./components/UIController";
 import { StorageManager } from "./components/Storage";
+import { Renderer } from "./components/Renderer";
+import { FormHandler } from "./components/FormHandler";
 
 const projectManager = new ProjectManager();
 const storageManager = new StorageManager();
 const uiController = new UIController(projectManager, storageManager);
+const renderer = new Renderer(uiController);
+uiController.renderer = renderer;
+const formHandler = new FormHandler(uiController);
 
 document.addEventListener("DOMContentLoaded", () => {
   const storedProjects = storageManager.getStoredProjects();
@@ -25,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
           task.taskCompleted
         );
     });
-
-    uiController.renderProjects(projectManager.getProjects());
   });
+  renderer.renderProjects(projectManager.getProjects());
 });
