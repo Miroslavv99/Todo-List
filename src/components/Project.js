@@ -1,9 +1,10 @@
 import { Task } from "./Task";
 
 export class Project {
-  constructor(projectTitle) {
+  constructor(id, projectTitle) {
+    this.id = id;
     this.projectTitle = projectTitle;
-    this._tasks = [];
+    this.tasks = [];
   }
 
   addTask(
@@ -14,20 +15,21 @@ export class Project {
     taskCompleted
   ) {
     const task = new Task(
+      crypto.randomUUID(),
       taskTitle,
       taskDescription,
       taskDeadline,
       taskPriority,
       taskCompleted
     );
-    this._tasks.push(task);
+    this.tasks.push(task);
   }
 
-  deleteTask(index) {
-    this._tasks.splice(index, 1);
+  deleteTask(taskID) {
+    this.tasks = this.tasks.filter((task) => task.id !== taskID);
   }
 
   getTasks() {
-    return this._tasks;
+    return this.tasks;
   }
 }

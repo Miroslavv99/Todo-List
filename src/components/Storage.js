@@ -11,9 +11,9 @@ export class StorageManager {
     projects = JSON.parse(projects);
 
     return projects.map((projectData) => {
-      const project = new Project(projectData.projectTitle);
+      const project = new Project(projectData.id, projectData.projectTitle);
 
-      projectData._tasks.forEach((taskData) => {
+      projectData.tasks.forEach((taskData) => {
         project.addTask(
           taskData.taskTitle,
           taskData.taskDescription,

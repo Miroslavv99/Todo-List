@@ -1,5 +1,3 @@
-import { UIController } from "./UIController";
-
 export class Renderer {
   constructor(uiController) {
     this.uiController = uiController;
@@ -9,7 +7,7 @@ export class Renderer {
 
     projectContainer.innerHTML = "";
 
-    projects.forEach((project, index) => {
+    projects.forEach((project) => {
       const projectCard = document.createElement("button");
       projectCard.classList.add("project-card");
       projectContainer.appendChild(projectCard);
@@ -23,11 +21,11 @@ export class Renderer {
       projectCard.appendChild(deleteButton);
 
       deleteButton.addEventListener("click", () => {
-        this.uiController.deleteProject(index);
+        this.uiController.deleteProject(project.id);
       });
 
       projectCard.addEventListener("click", () => {
-        this.uiController.selectProject(index);
+        this.uiController.selectProject(project.id);
 
         const projectCards = document.querySelectorAll(".project-card");
         projectCards.forEach((card) => {
@@ -42,7 +40,7 @@ export class Renderer {
     const taskContainer = document.querySelector(".task-container");
     taskContainer.innerHTML = "";
 
-    tasks.forEach((task, index) => {
+    tasks.forEach((task) => {
       const taskCard = document.createElement("div");
       taskCard.classList.add("task-card");
       taskContainer.appendChild(taskCard);
@@ -98,7 +96,7 @@ export class Renderer {
       bottomContainer.appendChild(deleteTask);
 
       deleteTask.addEventListener("click", () => {
-        this.uiController.deleteTask(index);
+        this.uiController.deleteTask(task.id);
       });
 
       if (task.taskPriority === "Low") {

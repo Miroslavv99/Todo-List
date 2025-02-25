@@ -2,19 +2,19 @@ import { Project } from "./Project";
 
 export class ProjectManager {
   constructor() {
-    this._projects = [];
+    this.projects = [];
   }
 
   addProject(projectTitle) {
-    const project = new Project(projectTitle);
-    this._projects.push(project);
+    const project = new Project(crypto.randomUUID(), projectTitle);
+    this.projects.push(project);
   }
 
-  deleteProject(index) {
-    this._projects.splice(index, 1);
+  deleteProject(projectID) {
+    this.projects = this.projects.filter((project) => project.id !== projectID);
   }
 
   getProjects() {
-    return this._projects;
+    return this.projects;
   }
 }

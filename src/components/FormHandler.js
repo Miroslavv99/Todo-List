@@ -1,10 +1,6 @@
-import { UIController } from "./UIController";
-
 export class FormHandler {
   constructor(uiController) {
     this.uiController = uiController;
-    this.projectFormInit();
-    this.taskFormInit();
   }
 
   projectFormInit() {

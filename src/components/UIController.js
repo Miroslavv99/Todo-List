@@ -1,7 +1,3 @@
-import { ProjectManager } from "./ProjectManager";
-import { StorageManager } from "./Storage";
-import { Renderer } from "./Renderer";
-
 export class UIController {
   constructor(projectManager, storageManager, renderer) {
     this.storageManager = storageManager;
@@ -16,14 +12,16 @@ export class UIController {
     this.renderer.renderProjects(this.projectManager.getProjects());
   }
 
-  deleteProject(index) {
-    this.projectManager.deleteProject(index);
+  deleteProject(projectID) {
+    this.projectManager.deleteProject(projectID);
     this.storageManager.saveProjects(this.projectManager.getProjects());
     this.renderer.renderProjects(this.projectManager.getProjects());
   }
 
-  selectProject(index) {
-    this.selectedProject = this.projectManager.getProjects()[index];
+  selectProject(projectID) {
+    this.selectedProject = this.projectManager
+      .getProjects()
+      .find((project) => project.id === projectID);
     if (!this.selectedProject) return;
     this.renderer.renderTasks(this.selectedProject.getTasks());
   }
@@ -45,10 +43,10 @@ export class UIController {
     this.renderer.renderTasks(this.selectedProject.getTasks());
   }
 
-  deleteTask(index) {
+  deleteTask(taskID) {
     if (!this.selectedProject) return;
 
-    this.selectedProject.deleteTask(index);
+    this.selectedProject.deleteTask(taskID);
     this.storageManager.saveProjects(this.projectManager.getProjects());
     this.renderer.renderTasks(this.selectedProject.getTasks());
   }
