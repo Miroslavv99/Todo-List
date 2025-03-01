@@ -7,7 +7,9 @@ export class StorageManager {
 
   getStoredProjects() {
     let projects = localStorage.getItem("projects");
-    if (!projects) return [];
+    if (!projects) {
+      return [];
+    } 
     projects = JSON.parse(projects);
 
     return projects.map((projectData) => {
