@@ -23,5 +23,5 @@ document.addEventListener("DOMContentLoaded", () => {
     projectManager.getProjects().push(project);
   });
 
-  formHandler.renderer.renderProjects(projectManager.getProjects());
+  uiController.renderer.renderProjects(projectManager.getProjects());
 });
