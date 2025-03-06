@@ -12,7 +12,7 @@ export class FormHandler {
 
       const projectTitleValue = projectTitleInput.value;
 
-      if (projectTitleValue.trim()) {
+      if (!projectTitleInput.validity.tooShort) {
         this.uiController.addProject(projectTitleValue);
       }
 
