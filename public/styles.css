@@ -120,10 +120,11 @@ label {
 }
 
 .project-form {
+  position: relative;
   margin-top: 10px;
   display: flex;
   background-color: rgb(255, 255, 255);
-  height: 90px;
+  height: 120px;
   align-items: center;
   justify-content: space-around;
   padding: 10px;
@@ -320,11 +321,12 @@ label {
 }
 
 .error {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 100%;
+  width: 70%;
   padding: 0;
   font-size: 80%;
   color: white;
